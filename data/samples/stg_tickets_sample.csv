@@ -1,0 +1,11 @@
+ticket_id,ticket_prefix,created_date,employee_id,agent_id,request_category,issue_type,severity_raw,severity_label,priority_raw,priority_label,resolution_time_days,satisfaction_rating
+TDLTER-1242541742,TDLTER,2016-06-20,1004,17,Hardware,IT Request,2 - Normal,Normal,0 - Unassiged,Unassigned,12,4
+KMLTER-8543136420,KMLTER,2018-02-05,1862,4,Software,IT Request,2 - Normal,Normal,2 - Mid,Mid,3,5
+TMLTER-3843722602,TMLTER,2019-09-14,1630,26,Software,IT Request,2 - Normal,Normal,2 - Mid,Mid,8,5
+KWLTER-7744004459,KWLTER,2020-06-22,1765,44,Software,IT Request,2 - Normal,Normal,1 - Low,Low,7,3
+KHLESR-5243354640,KHLESR,2018-09-11,814,16,System,IT Error,2 - Normal,Normal,3 - High,High,1,5
+THLTSR-3743935343,THLTSR,2020-04-14,504,23,System,IT Request,2 - Normal,Normal,3 - High,High,7,5
+KWLTSR-7542695520,KWLTSR,2016-11-21,892,15,System,IT Request,2 - Normal,Normal,1 - Low,Low,5,4
+SDLTSR-2943406412,SDLTSR,2018-11-02,281,24,System,IT Request,2 - Normal,Normal,0 - Unassiged,Unassigned,9,5
+THLTNR-7042861499,THLTNR,2017-05-06,769,24,Login Access,IT Request,2 - Normal,Normal,3 - High,High,0,5
+SDLENR-9143220077,SDLENR,2018-04-30,27,50,Login Access,IT Error,2 - Normal,Normal,0 - Unassiged,Unassigned,1,5
