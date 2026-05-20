@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_agents
+    description: "Agent dimension. One row per agent with name, email, birth date, and current age."
+    columns:
+      - name: agent_id
+        tests:
+          - unique
+          - not_null
+      - name: agent_name
+        tests:
+          - not_null
+      - name: agent_email
+      - name: agent_birth_date
+      - name: agent_age_years
+
+  - name: fct_tickets
+    description: "Wide ticket fact table. One row per ticket with all derived calendar/quality fields and the assigned agent's attributes denormalized in. Primary source for ad-hoc Hex exploration and the source of every downstream aggregate mart."
+    columns:
+      - name: ticket_id
+        tests:
+          - unique
+          - not_null
+      - name: agent_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_agents')
+                field: agent_id
+              config:
+                severity: warn
+      - name: severity_level
+        tests:
+          - not_null
+      - name: is_sla_breach
+        tests:
+          - not_null

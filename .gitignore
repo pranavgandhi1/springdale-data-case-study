@@ -7,8 +7,8 @@ profiles.yml
 
 # dbt artifacts
 dbt/target/
-dbt/logs/
 dbt/dbt_packages/
+logs/
 
 # Internal working files (not for public)
 docs/internal/
