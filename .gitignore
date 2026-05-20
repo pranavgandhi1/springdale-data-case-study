@@ -12,6 +12,7 @@ dbt/dbt_packages/
 
 # Internal working files (not for public)
 docs/internal/
+.claude/
 
 # Python / general
 __pycache__/
