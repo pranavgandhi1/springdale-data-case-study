@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: stg_tickets
+    description: "Staged IT tickets. One row per ticket. Renames source columns to semantic names, casts types, parses dates, and joins canonicalization seeds for severity and priority. Surfaces both raw and canonical enum values so downstream models can trace back to source."
+    columns:
+      - name: ticket_id
+        description: "Original ticket ID string from source (e.g., GHLTET-9444141062). Primary key."
+        tests:
+          - unique
+          - not_null
+      - name: ticket_prefix
+        description: "First segment of ticket_id before the dash (e.g., GHLTET). Hypothesized to encode site or department."
+        tests:
+          - not_null
+      - name: created_date
+        description: "Ticket creation date, parsed from the source M/D/YYYY string."
+      - name: employee_id
+        description: "ID of the employee who submitted the ticket."
+      - name: agent_id
+        description: "ID of the agent assigned to handle the ticket."
+      - name: request_category
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Hardware', 'Login Access', 'Software', 'System']
+      - name: issue_type
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['IT Error', 'IT Request']
+      - name: severity_raw
+        description: "Original severity string from source, retained for traceability."
+      - name: severity_level
+        description: "Canonical severity level (0-4) from the canonicalization seed."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1, 2, 3, 4]
+      - name: severity_label
+        description: "Canonical severity label."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Unclassified', 'Minor', 'Normal', 'Major', 'Urgent']
+      - name: priority_raw
+        description: "Original priority string from source, retained for traceability."
+      - name: priority_level
+        description: "Canonical priority level (0-3) from the canonicalization seed."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1, 2, 3]
+      - name: priority_label
+        description: "Canonical priority label."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Unassigned', 'Low', 'Mid', 'High']
+      - name: resolution_time_days
+        description: "Resolution time in days. Assumption: source value is days (observed range 0-21 in samples)."
+        tests:
+          - not_null
+      - name: satisfaction_rating
+        description: "Customer satisfaction rating, 1-5. Verified 100% populated across all tickets."
+
+  - name: stg_agents
+    description: "Staged IT agents. One row per agent. Combines split birth columns into a single date and derives age."
+    columns:
+      - name: agent_id
+        description: "Primary key. Matches fct_tickets.agent_id."
+        tests:
+          - unique
+          - not_null
+      - name: full_name
+        tests:
+          - not_null
+      - name: email
+        tests:
+          - not_null
+      - name: birth_date
+        description: "Date of birth assembled from source year/month/day columns."
+      - name: age_years
+        description: "Derived age in years as of dbt run date. Recomputed each run."
