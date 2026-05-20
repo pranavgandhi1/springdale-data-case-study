@@ -1,0 +1,17 @@
+# Copy this file to ~/.dbt/profiles.yml and fill in the password.
+# Do NOT commit your actual profiles.yml.
+
+springdale:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: SOEWMEG-AG74770
+      user: PGANALYTICS
+      password: <your_snowflake_password>
+      role: TRANSFORMER_ROLE
+      database: SPRINGDALE_ANALYTICS
+      warehouse: TRANSFORM_WH
+      schema: marts
+      threads: 4
+      client_session_keep_alive: False
