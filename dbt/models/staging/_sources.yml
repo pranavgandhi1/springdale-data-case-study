@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: it_source
+    description: "Raw IT ticket and agent data landed by Airbyte from the source Google Sheet."
+    database: SPRINGDALE_RAW
+    schema: IT_SOURCE
+    loader: airbyte
+    config:
+      loaded_at_field: _airbyte_extracted_at
+      freshness:
+        warn_after:
+          count: 36
+          period: hour
+        error_after:
+          count: 72
+          period: hour
+    tables:
+      - name: it_tickets
+        identifier: IT_TICKETS
+        description: "One row per IT ticket. Source: IT Tickets tab of the source spreadsheet."
+        columns:
+          - name: id_ticket
+            description: "Ticket identifier, e.g. GDDENR-50. Prefix appears to encode site or department."
+          - name: date
+            description: "Ticket creation date as M/D/YY string."
+          - name: employee_id
+          - name: agent_id
+          - name: request_category
+          - name: issue_type
+          - name: severity
+            description: "Raw severity string like '2 - Normal' or '3 - Mayor' (misspelled in source)."
+          - name: priority
+            description: "Raw priority string like '3 - High' or '0 - Unassiged' (misspelled in source)."
+          - name: resolution_time_days_
+            description: "Resolution time in days. Trailing underscore is an Airbyte artifact of stripping special characters from the source column name."
+          - name: satisfaction_rate
+
+      - name: it_agents
+        identifier: IT_AGENTS
+        description: "One row per agent. Source: IT Agents tab of the source spreadsheet."
+        columns:
+          - name: agent_id
+          - name: full_name
+          - name: email
+          - name: year_of_birth
+          - name: month_of_birth
+          - name: day_of_birth
