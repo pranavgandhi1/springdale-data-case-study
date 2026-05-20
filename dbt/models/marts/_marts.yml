@@ -36,3 +36,70 @@ models:
       - name: is_sla_breach
         tests:
           - not_null
+
+  - name: agg_throughput_daily
+    description: "Daily ticket throughput. One row per day in the dataset window. Tickets created, closed (using derived closed_date), and cumulative backlog."
+    columns:
+      - name: day_date
+        tests:
+          - unique
+          - not_null
+      - name: tickets_created
+        tests:
+          - not_null
+      - name: tickets_closed
+        tests:
+          - not_null
+      - name: cumulative_backlog
+
+  - name: agg_resolution_by_severity
+    description: "Resolution time distribution (p50/p90/p95) plus SLA breach rate per severity tier."
+    columns:
+      - name: severity_level
+        tests:
+          - unique
+          - not_null
+      - name: severity_label
+        tests:
+          - not_null
+      - name: ticket_count
+        tests:
+          - not_null
+      - name: sla_breach_rate_pct
+        tests:
+          - not_null
+
+  - name: agg_agent_performance
+    description: "Per-agent performance. Source for the Agent Performance Quadrants chart in Hex (volume + avg resolution + avg CSAT + SLA breach rate)."
+    columns:
+      - name: agent_id
+        tests:
+          - unique
+          - not_null
+      - name: tickets_handled
+        tests:
+          - not_null
+
+  - name: agg_data_quality_weekly
+    description: "Weekly data-quality scorecard. Trends % of tickets with unclassified severity, unassigned priority, missing CSAT, plus counts of severity-priority misalignment and zero resolution time."
+    columns:
+      - name: week_date
+        tests:
+          - unique
+          - not_null
+      - name: tickets_total
+        tests:
+          - not_null
+
+  - name: agg_demand_mix
+    description: "Demand decomposition by request category, issue type, and ticket prefix. Source for the demand heatmap."
+    columns:
+      - name: request_category
+        tests:
+          - not_null
+      - name: issue_type
+        tests:
+          - not_null
+      - name: tickets_total
+        tests:
+          - not_null
