@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: int_tickets_enriched
+    description: "Tickets with SLA targets joined and derived calendar/quality fields added. Source: stg_tickets joined to seed_sla_targets on severity_level."
+    columns:
+      - name: ticket_id
+        tests:
+          - unique
+          - not_null
+      - name: sla_target_days
+        description: "Days allowed to resolve, from seed_sla_targets, joined on severity_level."
+        tests:
+          - not_null
+      - name: closed_date
+        description: "Derived as created_date + resolution_time_days. Approximation; source has no true resolved_at timestamp."
+      - name: is_sla_breach
+        description: "True when resolution_time_days exceeds the SLA target for that severity."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+      - name: is_severity_unclassified
+        tests:
+          - not_null
+      - name: is_priority_unassigned
+        tests:
+          - not_null
+      - name: is_csat_missing
+        tests:
+          - not_null
+      - name: is_severity_priority_misaligned
+        description: "True when severity is Major/Urgent (level >= 3) but priority is Unassigned/Low (level <= 1). Indicates intake-process mismatch."
+        tests:
+          - not_null
+      - name: is_zero_resolution_time
+        tests:
+          - not_null
+      - name: created_dow
+        description: "Day of week, 0=Sunday."
+      - name: created_week
+      - name: created_month
+
+  - name: int_ticket_with_agent
+    description: "Enriched tickets joined to agent attributes via left join on agent_id. One row per ticket."
+    columns:
+      - name: ticket_id
+        tests:
+          - unique
+          - not_null
+      - name: agent_id
+      - name: agent_name
+      - name: agent_email
+      - name: agent_age_years
