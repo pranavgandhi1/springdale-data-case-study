@@ -1,0 +1,6 @@
+severity_level,severity_label,target_resolution_days
+0,Unclassified,5
+1,Minor,7
+2,Normal,5
+3,Major,3
+4,Urgent,2

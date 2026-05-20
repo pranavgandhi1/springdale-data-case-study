@@ -1,0 +1,8 @@
+raw_value,severity_level,severity_label
+0 - Unclasified,0,Unclassified
+0 - Unclassified,0,Unclassified
+1 - Minor,1,Minor
+2 - Normal,2,Normal
+3 - Mayor,3,Major
+3 - Major,3,Major
+4 - Urgent,4,Urgent

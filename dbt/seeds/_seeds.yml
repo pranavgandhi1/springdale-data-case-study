@@ -1,0 +1,68 @@
+version: 2
+
+seeds:
+  - name: seed_enum_canonical_severity
+    description: "Maps raw severity values from source (including misspellings like 'Unclasified', 'Mayor') to canonical level and label."
+    config:
+      column_types:
+        raw_value: varchar
+        severity_level: integer
+        severity_label: varchar
+    columns:
+      - name: raw_value
+        tests:
+          - unique
+          - not_null
+      - name: severity_level
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1, 2, 3, 4]
+      - name: severity_label
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Unclassified', 'Minor', 'Normal', 'Major', 'Urgent']
+
+  - name: seed_enum_canonical_priority
+    description: "Maps raw priority values to canonical level and label."
+    config:
+      column_types:
+        raw_value: varchar
+        priority_level: integer
+        priority_label: varchar
+    columns:
+      - name: raw_value
+        tests:
+          - unique
+          - not_null
+      - name: priority_level
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1, 2, 3]
+      - name: priority_label
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Unassigned', 'Low', 'Mid', 'High']
+
+  - name: seed_sla_targets
+    description: "SLA target resolution time in days, by severity. Business assumption for this case study; would come from the business in production."
+    config:
+      column_types:
+        severity_level: integer
+        severity_label: varchar
+        target_resolution_days: integer
+    columns:
+      - name: severity_level
+        tests:
+          - unique
+          - not_null
+      - name: target_resolution_days
+        tests:
+          - not_null
