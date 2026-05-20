@@ -2,19 +2,6 @@ with tickets as (
     select * from {{ ref('stg_tickets') }}
 ),
 
-sla as (
-    select severity_level, target_resolution_days
-    from {{ ref('seed_sla_targets') }}
-),
-
-joined as (
-    select
-        t.*,
-        s.target_resolution_days as sla_target_days
-    from tickets t
-    left join sla s using (severity_level)
-),
-
 enriched as (
     select
         ticket_id,
@@ -35,11 +22,10 @@ enriched as (
 
         resolution_time_days,
         satisfaction_rating,
-        sla_target_days,
 
         dateadd('day', resolution_time_days, created_date) as closed_date,
 
-        case when resolution_time_days > sla_target_days then true else false end as is_sla_breach,
+        case when resolution_time_days > {{ var('sla_threshold_days', 3) }} then true else false end as is_sla_breach,
 
         case when severity_level = 0 then true else false end as is_severity_unclassified,
         case when priority_level = 0 then true else false end as is_priority_unassigned,
@@ -56,7 +42,7 @@ enriched as (
 
         _airbyte_raw_id,
         _airbyte_extracted_at
-    from joined
+    from tickets
 )
 
 select * from enriched

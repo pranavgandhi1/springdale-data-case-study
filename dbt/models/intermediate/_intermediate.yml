@@ -2,20 +2,16 @@ version: 2
 
 models:
   - name: int_tickets_enriched
-    description: "Tickets with SLA targets joined and derived calendar/quality fields added. Source: stg_tickets joined to seed_sla_targets on severity_level."
+    description: "Tickets with derived calendar fields, SLA breach flag, and data-quality flags. Source: stg_tickets."
     columns:
       - name: ticket_id
         tests:
           - unique
           - not_null
-      - name: sla_target_days
-        description: "Days allowed to resolve, from seed_sla_targets, joined on severity_level."
-        tests:
-          - not_null
       - name: closed_date
         description: "Derived as created_date + resolution_time_days. Approximation; source has no true resolved_at timestamp."
       - name: is_sla_breach
-        description: "True when resolution_time_days exceeds the SLA target for that severity."
+        description: "True when resolution_time_days exceeds the SLA threshold (3 days, per case study spec; configurable via var sla_threshold_days)."
         tests:
           - not_null
           - accepted_values:

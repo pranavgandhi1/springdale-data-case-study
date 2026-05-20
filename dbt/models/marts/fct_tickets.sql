@@ -25,7 +25,6 @@ select
     resolution_time_days,
     satisfaction_rating,
 
-    sla_target_days,
     is_sla_breach,
 
     is_severity_unclassified,

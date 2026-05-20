@@ -1,6 +1,6 @@
 # Reconciliation Report
 
-Generated: 2026-05-20 03:50:38 UTC
+Generated: 2026-05-20 04:29:08 UTC
 
 Compares raw Airbyte-loaded tables in `SPRINGDALE_RAW.IT_SOURCE` against the transformed marts in `SPRINGDALE_ANALYTICS.MARTS`. Each check is either a row-count equality, an aggregate match, or a value-level spot check.
 
@@ -18,13 +18,13 @@ Compares raw Airbyte-loaded tables in `SPRINGDALE_RAW.IT_SOURCE` against the tra
 
 ## Spot-check detail
 
-- `TMLESR-4643108389`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `6` → `6` (OK)
-- `SHLEER-3343991333`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `3` → `3` (OK)
-- `GMLTNR-4143376975`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `1` → `1` (OK)
-- `GHLEER-4742385140`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `7` → `7` (OK)
-- `KHLENR-1144062826`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `1` → `1` (OK)
-- `GMLTSR-7943266311`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `4` → `4` (OK)
-- `GHLTST-3043136601`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `10` → `10` (OK)
-- `THLTER-2343773194`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `3` → `3` (OK)
-- `TDLTNR-6043472754`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `0` → `0` (OK)
-- `SHLEST-1344173322`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `3` → `3` (OK)
+- `GMREST-2043388823`: severity `3 - Mayor` → expected `Major`, actual `Major` (OK); resolution_time `10` → `10` (OK)
+- `SDLTET-0444105870`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `4` → `4` (OK)
+- `KWLTNR-5043374320`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `0` → `0` (OK)
+- `TDLESR-9344126173`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `3` → `3` (OK)
+- `GHLTSR-5643140453`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `6` → `6` (OK)
+- `GHLTSR-0643923598`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `6` → `6` (OK)
+- `KDLTET-5542605561`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `5` → `5` (OK)
+- `TMLTSR-0744030566`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `7` → `7` (OK)
+- `GDRTSR-6644009258`: severity `3 - Mayor` → expected `Major`, actual `Major` (OK); resolution_time `6` → `6` (OK)
+- `GDLTST-9743196400`: severity `2 - Normal` → expected `Normal`, actual `Normal` (OK); resolution_time `7` → `7` (OK)

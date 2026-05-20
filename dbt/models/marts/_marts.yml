@@ -34,6 +34,47 @@ models:
         tests:
           - not_null
       - name: is_sla_breach
+        description: "Flat 3-day SLA breach flag (resolution_time_days > 3), per the case study spec. Configurable via var sla_threshold_days."
+        tests:
+          - not_null
+
+  - name: agg_severity_priority_mix
+    description: "Ticket workload risk profile: count of tickets at each combination of severity and priority. Required KPI 1 from the case study spec."
+    columns:
+      - name: severity_label
+        tests:
+          - not_null
+      - name: priority_label
+        tests:
+          - not_null
+      - name: ticket_count
+        tests:
+          - not_null
+
+  - name: agg_tickets_per_agent_per_week
+    description: "Weekly resolution throughput per agent, computed on derived closed_date. Required KPI 2 from the case study spec."
+    columns:
+      - name: agent_id
+        tests:
+          - not_null
+      - name: week_date
+        tests:
+          - not_null
+      - name: tickets_resolved
+        tests:
+          - not_null
+
+  - name: agg_resolution_by_category
+    description: "Median, average, and 90th-percentile resolution time per request category, plus flat 3-day SLA breach rate. Required KPI 3 from the case study spec (interpreting 'issue type / category' as request_category since it has 4 values rather than 2)."
+    columns:
+      - name: request_category
+        tests:
+          - unique
+          - not_null
+      - name: ticket_count
+        tests:
+          - not_null
+      - name: median_resolution_days
         tests:
           - not_null
 

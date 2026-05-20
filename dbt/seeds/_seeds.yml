@@ -50,19 +50,3 @@ seeds:
           - accepted_values:
               arguments:
                 values: ['Unassigned', 'Low', 'Mid', 'High']
-
-  - name: seed_sla_targets
-    description: "SLA target resolution time in days, by severity. Business assumption for this case study; would come from the business in production."
-    config:
-      column_types:
-        severity_level: integer
-        severity_label: varchar
-        target_resolution_days: integer
-    columns:
-      - name: severity_level
-        tests:
-          - unique
-          - not_null
-      - name: target_resolution_days
-        tests:
-          - not_null

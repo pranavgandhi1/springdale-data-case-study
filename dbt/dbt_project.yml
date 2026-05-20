@@ -18,6 +18,7 @@ clean-targets:
 
 vars:
   resolution_time_outlier_days: 90
+  sla_threshold_days: 3
 
 models:
   springdale:
