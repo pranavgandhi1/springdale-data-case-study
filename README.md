@@ -70,7 +70,7 @@ Springdale's IT team handles ~600 tickets/week — 2.4× the volume of five year
 | 3 | Median resolution time by issue type | `agg_resolution_by_category` | Interpreted as `request_category` (Hardware/Software/System/Login Access) rather than the binary `issue_type` — see Design Decisions |
 | 4 | SLA compliance rate (≤3 days) | `agg_resolution_by_severity`, `fct_tickets.is_sla_breach` | Flat 3-day threshold, configurable via dbt var `sla_threshold_days` |
 
-**Added KPIs (analyst's choice):**
+**Added KPIs:**
 
 | KPI | Mart | Why it earns its place |
 |---|---|---|
