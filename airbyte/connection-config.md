@@ -46,7 +46,7 @@ The Snowflake objects (database, schema, roles, warehouse) are created by `dbt/s
 |---|---|
 | Source | Springdale IT Sheet |
 | Destination | Springdale Snowflake RAW |
-| Streams enabled | `it_tickets`, `it_agents` |
+| Streams enabled | `tickets`, `it_agents` |
 | Sync mode | Full refresh + Overwrite + Deduped (both streams) |
 | Primary key | `it_tickets`: `id_ticket`; `it_agents`: `agent_id` |
 | Replication frequency | Manual (set to Daily after the first verified sync) |
