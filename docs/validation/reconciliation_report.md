@@ -1,7 +1,5 @@
 # Reconciliation Report
 
-Generated: 2026-05-20 04:29:08 UTC
-
 Compares raw Airbyte-loaded tables in `SPRINGDALE_RAW.IT_SOURCE` against the transformed marts in `SPRINGDALE_ANALYTICS.MARTS`. Each check is either a row-count equality, an aggregate match, or a value-level spot check.
 
 ## Summary
